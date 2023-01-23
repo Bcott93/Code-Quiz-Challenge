@@ -26,6 +26,18 @@ button {
   transition: background-color 0.1s;
 }
 
+.answer-button {
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 100%;
+  background-color: #563d7c;
+  border-radius: 5px;
+  padding: 2px 10px;
+  color: white;
+  border: 0;
+}
+
 button:hover {
   background-color: #8570a5;
 }
