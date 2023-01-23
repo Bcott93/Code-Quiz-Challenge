@@ -55,7 +55,7 @@ let start = document.querySelector("#start")
 let secondsRemaining = 60
 // Shows the remaining time
 time.textContent = secondsRemaining
-// Setting question to 0 for use in the forloop later on
+// Setting question to 0 for use in the a loop later on
 let currentQuestion = 0 
 // Setting score
 let score = 0
@@ -63,21 +63,116 @@ let score = 0
 // start quiz
 document.getElementById("start").addEventListener("click", startQuiz)
 
-function starttimer() {
-    setInterval(function() {
-        time--;
-       time.textContent = secondsRemaining
-    })
-
-}
-
 function startQuiz() {
     document.getElementById("start").style.display = "none";
     showQuestion();
     startTimer();
 }
 
-function showQuestion
+// Goes into the questions array and navigates to the current question and finds the data for the loop 
+function showQuestion() {
+    let question = questions[currentQuestion].question
+    let answer = questions[currentQuestion].answers
+// check what this does
+    document.getElementById("question").innerHTML = question
+}
+
+
+
+
+
+// Enables the answer buttons on the DOM
+let choices = document.getElementById("choices")
+
+for (let letter in answers) {
+    // Creating the buttons
+    let button = document.createElement("button")
+    // Adding CSS to the JS
+    button.classList.add("button")
+    // Labeling each button
+    button.value = letter
+    // Giving the 
+    button.innerHTML = letter + ": " + answers[letter]
+    // adding the buttons to the choices tag in HTML
+    choices.appendChild(button)
+}
+
+function checkAnswer(event) {
+    let userAnswer = event.target.value
+    let correctAnswer = questions[currentQuestion].correctAnswer
+
+    if (userAnswer === correctAnswer) {
+        score ++
+    } else {
+        timer = timer - 10
+    }
+
+    currentQuestion++
+
+    if (currentQuestion === questions.length) {
+        endQuiz()
+    } else {
+        showQuestion()
+    }
+}
+
+// ADD A COMMENT
+function starttimer() {
+    setInterval(function() {
+       time--
+       time.textContent = secondsRemaining
+
+       if(time === 0) {
+        endQuiz();
+       }
+      }, 1000)
+
+}
+
+// endQuiz function removes actions from an element
+function endQuiz() {
+    clear
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let buttonClick = document.getElementsByClassName("button")
+
+//     for (let i = 0; i < buttonClick.length; i++) {
+//         buttonClick[i].addEventListener("click", checkAnswer)
+//     }
+// }
+
 
 
 
@@ -96,7 +191,7 @@ function showQuestion
 
 
 
-const answers = ["Answer 1", "Answer 2", "Answer 3", "Answer 4", "Answer 5"]
+
 
 
 
