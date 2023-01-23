@@ -48,19 +48,22 @@ const questions = [
     }]
 
 
-let time = document.querySelector("#time") // Timer display 
-let start = document.querySelector("#start") // Start Button
-let secondsRemaining = 60 // Sets the start of the timer
-time.textContent = secondsRemaining // Shows the remaining time
 let currentQuestion = 0  // Setting question to 0 for use in the a loop later on
-let score = 0 // Setting score
-let startScreen = document.getElementById("start-screen")
-let questionDiv = document.getElementById("questions"); // Question Div
-let questionTitle = document.getElementById("question-title"); // Set the questions to the title
 let clearPrev = document.getElementById("choices") // Removes previous choices from the quiz
 
+let score = 0 // Setting score
+let scoreDisplay = document.getElementById("final-score")
+
+let startScreen = document.getElementById("start-screen")
+let endScreen = document.getElementById("end-screen")
+let questionScreen = document.getElementById("questions"); // Question Div
+let questionTitle = document.getElementById("question-title"); // Set the questions to the title
+
+let timerInterval  // Setting variable for timer
+let secondsRemaining = questions.length*15 // Sets timer for 15 seconds per question. Allowing for additional questions in the future
+time.textContent = secondsRemaining // Displays the timer
+
 // start quiz
-document.getElementById("start").addEventListener("click", startQuiz)
 
 function startQuiz() {
     showQuestion()
@@ -68,10 +71,9 @@ function startQuiz() {
     displayQuestions()
 }
 
-
 function displayQuestions() {
     startScreen.classList.add("hide")
-    questionDiv.classList.remove("hide")
+    questionScreen.classList.remove("hide")
 }
 
 
@@ -106,9 +108,11 @@ function checkAnswer(event) {
     let correctAnswer = questions[currentQuestion].correctAnswer
 
     if (userAnswer === correctAnswer) {
-        score ++
+        score = score +10
+        secondsRemaining = secondsRemaining + 15
     } else {
-        secondsRemaining = secondsRemaining - 10
+        secondsRemaining = secondsRemaining - 15
+        score = score - 10
     }
 
     if (currentQuestion === questions.length - 1) {
@@ -121,12 +125,12 @@ function checkAnswer(event) {
 
 // ADD A COMMENT
 function startTimer() {
-    setInterval(function() {
+    timer = setInterval(function() {
        secondsRemaining--
        time.textContent = secondsRemaining
 
        if(secondsRemaining === 0) {
-        clearInterval(time)
+        clearInterval(timer)
         endQuiz()
        }
       }, 1000)
@@ -135,11 +139,14 @@ function startTimer() {
 
 // endQuiz function removes actions from an element
 function endQuiz() {
-    clearInterval(time)
+    questionScreen.classList.add("hide")
+    endScreen.classList.remove("hide")
+    scoreDisplay.textContent = score
+    clearInterval(secondsRemaining)
 }
 
 
-
+start.addEventListener("click", startQuiz)
 
 
 
