@@ -53,8 +53,8 @@ let clearPrev = document.getElementById("choices") // Sets variable to enable cl
 
 let score = 0 // Setting score
 let scoreDisplay = document.getElementById("final-score") // Display score
-let highscoreSubmit = document.getElementById("submit") // Sets a variable to save scores to the localstorage
-let userHighscore = [] // Sets a variable to an array. Ready for their initials and score
+// let highscoreSubmit = document.getElementById("submit") // Sets a variable to save scores to the localstorage
+// let userHighscore = [] // Sets a variable to an array. Ready for their initials and score
 
 let initials = document.getElementById("initials.value") // Access to where the user enters their initials. 
 
@@ -159,9 +159,34 @@ function endQuiz() {
     clearInterval(timer)
 }
 
-console.log(initials)
+// if (!initials) {
+//     alert("Enter your initials to be immortalised as a HIGHSCORER on our Code Quiz Challenge!")
+    
+// } else {
+//     let savedHighscores = JSON.parse(window.localStorage.getItem("savedHighscores")) || []
+// }
 
-JSON.parse(window.localStorage.getItem("savedHighscores"))
+// userHighscore = {
+//     initials: initials,
+//     score: scoreDisplay
+//     }
+
+// savedHighscores.push(userHighscore)
+
+// window.localStorage.setItem("savedHighscores", JSON.stringify(userHighscore))
+
+// window.location.href = "highscores.html"
+
+// function submitEnter(event) {
+//     if (event.key === "Enter") {
+//       saveScore();
+//     }
+//   }
+
+// Runs the quiz once the start button has been selected
+start.addEventListener("click", startQuiz)
+
+
 
 // function highscore(userinput) {
 //     userinput = document.getElementById
@@ -169,16 +194,6 @@ JSON.parse(window.localStorage.getItem("savedHighscores"))
 
     
 // }
-
-
-// window.location.href = "highscores.html"
-
-// Runs the quiz once the start button has been selected
-start.addEventListener("click", startQuiz)
-
-
-
-
 
 
 
