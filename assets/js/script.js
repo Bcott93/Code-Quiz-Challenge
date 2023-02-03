@@ -15,7 +15,7 @@ const questions = [
         answers: {
             a: "Learning a language",
             b: "Drinking a coffee",
-            c: "Parellel parking"
+            c: "Parallel parking"
         },
         correctAnswer: "a"
     },
@@ -53,10 +53,6 @@ let clearPrev = document.getElementById("choices") // Sets variable to enable cl
 
 let score = 0 // Setting score
 let scoreDisplay = document.getElementById("final-score") // Display score
-// let highscoreSubmit = document.getElementById("submit") // Sets a variable to save scores to the localstorage
-// let userHighscore = [] // Sets a variable to an array. Ready for their initials and score
-
-let initials = document.getElementById("initials.value") // Access to where the user enters their initials. 
 
 let startScreen = document.getElementById("start-screen") // Access to the start screen in HTML
 let endScreen = document.getElementById("end-screen") // Access to the end screen in HTML
@@ -66,6 +62,37 @@ let questionTitle = document.getElementById("question-title") // Set the questio
 let timerInterval  // Setting variable for timer
 let secondsRemaining = questions.length*15 // Sets timer for 15 seconds per question. Allowing for additional questions in the future
 time.textContent = secondsRemaining // Displays the timer
+
+// Sets a variable for submitBtn and attaches it to the ID in the HTML
+let submitBtn = document.getElementById("submit-button")
+
+
+function savetolocalstorage() {
+    let userInitials = document.getElementById("initials").value.trim()
+    // If the intials are not empty, continue with the code.
+    if (userInitials !== "") {
+        
+        // sets the userHighscore variable, and adds values to initials and score. 
+        let userHighScore = {
+            initials: userInitials,
+            score: score,
+        }
+
+    // Takes the users score from local storage, and adds it to the variable savedHighScores
+    let savedHighScores = JSON.parse(window.localStorage.getItem("high-scores")) || []
+
+
+// Adds userHighScore values into the savedHighScores variable.
+savedHighScores.push(userHighScore)
+// savedHighScores is saved into Local Storage in the relevant format.
+window.localStorage.setItem("high-scores", JSON.stringify(savedHighScores))
+// Sends the user to the highscores page.
+window.location.href = "./assets/html/highscores.html"
+    }
+}
+// Runs the savetolocalstorage function when it is clicked
+submitBtn.onclick=savetolocalstorage
+
 
 // start quiz
 function startQuiz() {
@@ -158,58 +185,9 @@ function endQuiz() {
     // Ends the timer
     clearInterval(timer)
 }
-
-// if (!initials) {
-//     alert("Enter your initials to be immortalised as a HIGHSCORER on our Code Quiz Challenge!")
-    
-// } else {
-//     let savedHighscores = JSON.parse(window.localStorage.getItem("savedHighscores")) || []
-// }
-
-// userHighscore = {
-//     initials: initials,
-//     score: scoreDisplay
-//     }
-
-// savedHighscores.push(userHighscore)
-
-// window.localStorage.setItem("savedHighscores", JSON.stringify(userHighscore))
-
-// window.location.href = "highscores.html"
-
-// function submitEnter(event) {
-//     if (event.key === "Enter") {
-//       saveScore();
-//     }
-//   }
-
-// Runs the quiz once the start button has been selected
+//Runs the start of the quiz
+let start = document.getElementById("start")
 start.addEventListener("click", startQuiz)
-
-
-
-// function highscore(userinput) {
-//     userinput = document.getElementById
-//     userHighScore = ["userInput ", score]
-
-    
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
